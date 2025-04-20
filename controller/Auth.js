@@ -25,12 +25,6 @@ exports.signup = async(req,res)=>{
         const hashedPassword = await bcrypt.hash(password,10);
         console.log("got here")
 
-        const self = await Self.create({
-            amount: 0,
-            createdAt: Date.now(),
-            updatedAt: Date.now()
-        });
-
         //here we can create a verification token
         const emailVerificationToken = jwt.sign({
             email:email
