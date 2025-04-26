@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        reqired:true,
+        required:true,
     },
     emailVerityToken:{
         type:String,
@@ -26,6 +26,31 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    bio:{
+        type:String,
+        default: ""
+    },
+    address:{
+        type:String,
+        default : ""
+    },
+    posts:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Post",
+        default: []
+    }],
+    followers:[{
+        type: String,
+        default: []
+    }],
+    following:[{
+        type:String,
+        default: []
+    }],
+    about:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"About"
+    },
     profileImage:{
         type:String,
         default: null
@@ -34,6 +59,10 @@ const userSchema = new mongoose.Schema({
         type:Date,
         default:Date.now()
     },
+    updatedAt: {
+        type:Date,
+        default:Date.now()
+    }
 
 })
 
