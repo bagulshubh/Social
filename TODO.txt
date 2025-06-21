@@ -1,9 +1,9 @@
-
-
-1. Share
+1.Story
 2. Buy Event Ticket
 
+
 Future :
-1. Story
-2. Streak
-3. Showcase --> startup
+1. Streak
+2. Showcase --> startup
+3. Notification
+4. Message
