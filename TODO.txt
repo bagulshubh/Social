@@ -1,10 +1,7 @@
 
 
-1. Like
-2. Comment
-3. Share
-4. Save
-5. Buy Event Ticket
+1. Share
+2. Buy Event Ticket
 
 Future :
 1. Story

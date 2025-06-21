@@ -10,6 +10,10 @@ const commentSchema = new mongoose.Schema({
         type:Number,
         default : 0
     },
+    postId : {
+        type:String,
+        required: true
+    },
     createAt:{
         type:Date,
         default:Date.now()
