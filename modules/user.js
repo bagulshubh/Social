@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema({
         ref:"Post",
         default: []
     }],
+    event:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Event",
+        default: []
+    }],
     savedPost:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Post",

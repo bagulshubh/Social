@@ -1,4 +1,5 @@
 const Post = require("../modules/post");
+const User = require("../modules/user");
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
 
 exports.createPost = async(req,res) => {
@@ -15,6 +16,14 @@ exports.createPost = async(req,res) => {
                 message: "Discription and postType are required"
             })
         }
+
+        const user = await User.findById(userId);
+        if(!user) {
+            return res.status(400).json({
+                success:false,
+                message : "User does not exists"
+            })
+        }
         
         const image = await uploadImageToCloudinary(
             file,
@@ -24,10 +33,11 @@ exports.createPost = async(req,res) => {
         )
         const imageUrl = image.secure_url;
 
-        //TODO : save post into user
-
         const createdPost = await Post.create({discription, media  : imageUrl, postType, userId});
-        
+
+        user.posts.push(createdPost._id);
+        await user.save();
+
         return res.status(200).json({
             success: true,
             message : "Post Created Successfully",

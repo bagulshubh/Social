@@ -1,4 +1,5 @@
 const Event = require("../modules/event");
+const User = require("../modules/user");
 const Ticket = require("../modules/ticketPlan");
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
 
@@ -6,6 +7,17 @@ exports.createEvent = async(req,res) => {
     try{
 
         const eventObject = req.body;
+
+        const userId = req.userId;
+        eventObject.userId = userId;
+        
+        const user = await User.findById(userId);
+        if(!user) {
+            return res.status(400).json({
+                success:false,
+                message: "User Not found"
+            })
+        }
 
         const banner = req.files.banner;
 
@@ -21,10 +33,9 @@ exports.createEvent = async(req,res) => {
         const ticketList = ticketString.split(",");
         eventObject.ticketPlan = ticketList;
 
-        const userId = req.userId;
-        eventObject.userId = userId;
-        //TODO : save event in user
         const createdEvent = await Event.create(eventObject);
+        user.event.push(createdEvent._id);
+        await user.save();
 
         return res.status(200).json({
             success:true,
