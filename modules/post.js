@@ -18,8 +18,12 @@ const postSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    comments:{
-        type:String, //TODO : convert into a model
+    comments:[{
+        type: mongoose.Schema.Types.ObjectId,
+        default : ""
+    }],
+    userId : {
+        type: String
     },
     createAt:{
         type:Date,

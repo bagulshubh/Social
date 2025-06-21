@@ -5,8 +5,12 @@ const cookieParser = require("cookie-parser");
 const database = require('./config/dbonfig');
 const cors = require("cors")
 const fileUpload = require("express-fileupload")
-const authRouter = require("./route/auth");
-const userRouter = require("./route/user");
+const authRouter = require("./route/authRoute");
+const userRouter = require("./route/userRoute");
+const postRouter = require("./route/postRoute");
+
+const {cloudinaryConnect} = require("./config/cloudinary");
+
 
 database.connect();
 
@@ -27,9 +31,11 @@ app.use(
 	})
 );
 
+cloudinaryConnect();
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/post", postRouter);
 app.use("/hailing",(req,res)=>{
     return res.status(200).json({
         success:true,
