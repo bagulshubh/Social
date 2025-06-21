@@ -24,6 +24,8 @@ exports.createPost = async(req,res) => {
         )
         const imageUrl = image.secure_url;
 
+        //TODO : save post into user
+
         const createdPost = await Post.create({discription, media  : imageUrl, postType, userId});
         
         return res.status(200).json({

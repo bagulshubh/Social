@@ -8,6 +8,7 @@ const fileUpload = require("express-fileupload")
 const authRouter = require("./route/authRoute");
 const userRouter = require("./route/userRoute");
 const postRouter = require("./route/postRoute");
+const eventRouter = require("./route/eventRoute");
 
 const {cloudinaryConnect} = require("./config/cloudinary");
 
@@ -36,6 +37,7 @@ cloudinaryConnect();
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/event", eventRouter);
 app.use("/hailing",(req,res)=>{
     return res.status(200).json({
         success:true,
