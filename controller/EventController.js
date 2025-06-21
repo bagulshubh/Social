@@ -99,3 +99,31 @@ exports.getEvent = async(req,res) => {
         })
     }
 }
+
+exports.getUserEvents = async(req,res) => {
+    try{
+
+        const userId = req.userId;
+
+        if(!userId)  {
+            return res.status(400).json({
+                success:false,
+                message:"UserId required"
+            })
+        }
+
+        const events = await Event.find({userId: userId});
+
+        return res.status(200).json({
+            success:true,
+            message:"Events found",
+            body: events
+        })
+
+    } catch(err) {
+        return res.status(500).json({
+            success: false,
+            message:err.message
+        })
+    }
+}

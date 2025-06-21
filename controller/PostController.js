@@ -79,3 +79,31 @@ exports.getPost = async(req,res) => {
         })
     }
 }
+
+exports.getUserPosts = async(req,res) => {
+    try{
+
+        const userId = req.userId;
+
+        if(!userId) {
+            return res.status(400).json({
+                success:false,
+                message:"Userid required"
+            })
+        }
+
+        const posts = await Post.find({userId : userId});
+
+        return res.status(200).json({
+            success:true,
+            mesasge:"Post found",
+            body: posts
+        })
+
+    } catch(err) {
+        return res.status(500).json({
+            success: false,
+            message : err.message
+        })
+    }
+}
